@@ -1,0 +1,40 @@
+# .editorconfig
+
+root = true
+
+# Top-most EditorConfig file
+[*.{cs,vb}]
+# 4 spaces for indentation
+indent_style = space
+indent_size = 4
+
+# Always use braces with if statements
+csharp_prefer_braces = true:suggestion
+
+# Prefer lambda expressions whenever possible
+csharp_style_expression_bodied_lambdas = true:warning
+csharp_style_expression_bodied_methods = true:warning
+csharp_style_expression_bodied_ctors = true:warning
+
+# Prefer var over explicit type
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+
+# Disallow unused variables
+dotnet_diagnostic.CS0168.severity = error
+dotnet_diagnostic.CS0219.severity = error
+
+# Optional: Add rules for whitespace, naming conventions, etc.
+[*.cs]
+# File encoding
+charset = utf-8
+
+# End of line
+end_of_line = lf
+
+# Trim trailing whitespace
+trim_trailing_whitespace = true
+
+# Insert final newline
+insert_final_newline = true
