@@ -9,8 +9,20 @@ public abstract class Entity : IEquatable<Entity>
 
     protected Entity() => Id = Guid.NewGuid();
 
-    public bool Equals(Entity? other) =>
-        other is not null && Id == other.Id;
+    public bool Equals(Entity? other) 
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Id == other.Id;
+    }
 
     public override bool Equals(object? obj) =>
         obj is Entity entity && Equals(entity);
