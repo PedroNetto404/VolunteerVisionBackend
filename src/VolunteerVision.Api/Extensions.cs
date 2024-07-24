@@ -19,19 +19,16 @@ public static class DependencyInjection
     {
         services.AddEndpointsApiExplorer();
 
-        services.AddSwaggerGen(config =>
+        services.AddSwaggerGen(config => config.SwaggerDoc("v1", new()
         {
-            config.SwaggerDoc("v1", new()
+            Title = "VolunteerVision.Api",
+            Version = "v1",
+            Contact = new()
             {
-                Title = "VolunteerVision.Api",
-                Version = "v1",
-                Contact = new()
-                {
-                    Name = "VolunteerVision",
-                    Email = "pedronetto31415@gmail.com"
-                }
-            });
-        });
+                Name = "VolunteerVision",
+                Email = "pedronetto31415@gmail.com"
+            }
+        }));
 
         return services;
     }

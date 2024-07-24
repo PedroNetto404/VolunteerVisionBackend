@@ -12,9 +12,9 @@ indent_size = 4
 csharp_prefer_braces = true:suggestion
 
 # Prefer lambda expressions whenever possible
-csharp_style_expression_bodied_lambdas = true:warning
-csharp_style_expression_bodied_methods = true:warning
-csharp_style_expression_bodied_ctors = true:warning
+csharp_style_expression_bodied_lambdas = true:error
+csharp_style_expression_bodied_methods = true:error
+csharp_style_expression_bodied_ctors = true:error
 
 # Prefer var over explicit type
 csharp_style_var_for_built_in_types = true:suggestion

@@ -20,4 +20,8 @@
   <ItemGroup>
     <Folder Include="Persistence/EntityTypesConfiguration/" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Extensions.cs" />
+    <Compile Include="Extensions\DependencyInjection.Auth.cs" />
+  </ItemGroup>
 </Project>

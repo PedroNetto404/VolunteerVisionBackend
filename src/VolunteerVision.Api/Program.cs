@@ -1,18 +1,21 @@
 using VolunteerVision.Api;
+using VolunteerVision.Api.Extensions;
 using VolunteerVision.Application;
-using VolunteerVision.Infra;
+using VolunteerVision.Domain.Extensions;
+using VolunteerVision.Infra.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder
     .Services
     .AddPresentation(builder.Configuration)
+    .AddDomain()
     .AddInfrastructure(builder.Configuration)
     .AddApplication(builder.Configuration);
 
-var app = builder.Build();
-
-app.ApplyMigrations();
-app.ConfigurePipeline(builder.Environment);
-
-await app.RunAsync();
+await builder
+    .Build()
+    .ApplyMigrations()
+    .AddSeedIfDevelopment()
+    .UsePipeline()
+    .RunAsync();
