@@ -1,4 +1,4 @@
-namespace VolunteerVision.Domain.Abstractions;
+namespace VolunteerVision.Domain.Core.Abstractions;
 
 /// <summary>
 /// Marker interface for domain events.

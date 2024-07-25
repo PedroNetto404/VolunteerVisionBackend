@@ -8,20 +8,10 @@
     <ProjectReference Include="..\VolunteerVision.Application\VolunteerVision.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+    <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Persistence/EntityTypesConfiguration/" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Extensions.cs" />
-    <Compile Include="Extensions\DependencyInjection.Auth.cs" />
   </ItemGroup>
 </Project>

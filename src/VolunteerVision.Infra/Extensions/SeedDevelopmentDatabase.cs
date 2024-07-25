@@ -2,7 +2,7 @@ using VolunteerVision.Infra.Persistence;
 
 namespace VolunteerVision.Infra.Extensions;
 
-internal static class Seed
+internal static class SeedDevelopmentDatabase
 {
     public static void Seed(this VolunteerVisionDbContext context)
     {

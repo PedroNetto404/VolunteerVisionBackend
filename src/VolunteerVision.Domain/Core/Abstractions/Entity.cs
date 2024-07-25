@@ -1,4 +1,4 @@
-namespace VolunteerVision.Domain.Abstractions;
+namespace VolunteerVision.Domain.Core.Abstractions;
 
 /// <summary>
 /// Abstract class representing an entity in the domain.

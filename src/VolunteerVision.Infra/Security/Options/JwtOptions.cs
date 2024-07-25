@@ -1,4 +1,4 @@
-﻿namespace VolunteerVision.Infra.Security.Models;
+﻿namespace VolunteerVision.Infra.Security.Options;
 
 /// <summary>
 /// Options for JWT authentication.

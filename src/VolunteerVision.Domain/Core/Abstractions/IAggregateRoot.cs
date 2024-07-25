@@ -1,4 +1,4 @@
-namespace VolunteerVision.Domain.Abstractions;
+namespace VolunteerVision.Domain.Core.Abstractions;
 
 /// <summary>
 /// Interface representing an aggregate root in the domain.

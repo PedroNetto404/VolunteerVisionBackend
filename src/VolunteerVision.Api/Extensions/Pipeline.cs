@@ -1,3 +1,4 @@
+
 namespace VolunteerVision.Api.Extensions;
 
 public static class Pipeline
