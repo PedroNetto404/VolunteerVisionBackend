@@ -1,20 +1,18 @@
 using System.Collections.Concurrent;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VolunteerVision.Domain.Core.Abstractions;
 using VolunteerVision.Infra.BackgroundServices;
-using VolunteerVision.Infra.Persistence;
 
 namespace VolunteerVision.Infra.Extensions;
 
 public static partial class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
+    private static IServiceCollection AddHostedServices(
         this IServiceCollection services,
         IConfiguration configuration) =>
         services
-            .AddHostedServices(configuration)
-            .AddDatabase(configuration)
-            .AddAuth(configuration);
+            .AddSingleton<DomainEventsDispatcher>()
+            .AddSingleton<ConcurrentQueue<IDomainEvent>>()
+            .AddHostedService<DomainEventsDispatcher>();
 }

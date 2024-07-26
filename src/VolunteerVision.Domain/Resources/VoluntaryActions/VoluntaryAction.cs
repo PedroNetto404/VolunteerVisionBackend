@@ -1,8 +1,8 @@
 using VolunteerVision.Domain.Core.Abstractions;
 using VolunteerVision.Domain.Core.Error;
-using VolunteerVision.Domain.Resouces.VoluntaryActions.Events;
+using VolunteerVision.Domain.Resources.VoluntaryActions.Events;
 
-namespace VolunteerVision.Domain.Resouces.VoluntaryActions;
+namespace VolunteerVision.Domain.Resources.VoluntaryActions;
 
 public sealed class VoluntaryAction : AggregateRoot
 {

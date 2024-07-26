@@ -3,6 +3,5 @@
 namespace VolunteerVision.Api.Controllers;
 
 [ApiController]
-public abstract class ApiController
-{
-}
+[Route("api/v1/[controller]")]
+public abstract class ApiController;

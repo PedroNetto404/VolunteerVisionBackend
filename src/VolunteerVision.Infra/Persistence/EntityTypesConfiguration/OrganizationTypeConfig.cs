@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VolunteerVision.Domain.Resouces.Organizations;
+using VolunteerVision.Domain.Resources.Organizations;
 
 namespace VolunteerVision.Infra.Persistence.EntityTypesConfiguration;
 

@@ -1,5 +1,5 @@
 using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Domain.Resouces.VoluntaryActions.Events;
+namespace VolunteerVision.Domain.Resources.VoluntaryActions.Events;
 
 public sealed record VoluntaryActionCreated(Guid ActionId) : IDomainEvent;

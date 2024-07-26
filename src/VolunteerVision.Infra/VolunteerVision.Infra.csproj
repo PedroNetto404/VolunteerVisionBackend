@@ -14,4 +14,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Extensions\DependencyInjection.DefinedServices.cs" />
+  </ItemGroup>
 </Project>

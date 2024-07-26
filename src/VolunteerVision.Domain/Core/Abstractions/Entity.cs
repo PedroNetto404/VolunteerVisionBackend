@@ -3,11 +3,9 @@ namespace VolunteerVision.Domain.Core.Abstractions;
 /// <summary>
 /// Abstract class representing an entity in the domain.
 /// </summary>
-public abstract class Entity : IEquatable<Entity>
+public abstract class Entity : IEquatable<Entity>, IEntity
 {
-    public Guid Id { get; private set; }
-
-    protected Entity() => Id = Guid.NewGuid();
+    public Guid Id { get; } = Guid.NewGuid();
 
     public bool Equals(Entity? other) 
     {

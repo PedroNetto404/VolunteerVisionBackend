@@ -8,8 +8,6 @@ public class DomainEventsInterceptor(
     ConcurrentQueue<IDomainEvent> toPublish
 ) : SaveChangesInterceptor
 {
-    private readonly ConcurrentQueue<IDomainEvent> _toPublish = toPublish;
-
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData, 
         InterceptionResult<int> result,
@@ -18,7 +16,7 @@ public class DomainEventsInterceptor(
         eventData
             .Context!
             .ChangeTracker
-            .Entries<AggregateRoot>()
+            .Entries<IAggregateRoot>()
             .Select(p => p.Entity)
             .SelectMany(aggregate =>
             {
@@ -27,7 +25,7 @@ public class DomainEventsInterceptor(
                 return domainEvents;
             })
             .ToList()
-            .ForEach(_toPublish.Enqueue);
+            .ForEach(toPublish.Enqueue);
 
         return base.SavingChangesAsync(
             eventData, 

@@ -1,6 +1,6 @@
 using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Domain.Resouces.Donors;
+namespace VolunteerVision.Domain.Resources.Donors;
 
 public class Donor : AggregateRoot
 {

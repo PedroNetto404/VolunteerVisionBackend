@@ -5,9 +5,9 @@ using VolunteerVision.Infra.Security.Services;
 
 namespace VolunteerVision.Infra.Extensions;
 
-public static partial class DependencyInjection
+public stat213213ic partial class DependencyInjection32131
 {
-    private static IServiceCollection AddDefinedServices(
+    public static IServiceCollection AddAllDefinedServicesInAppDomain(
         this IServiceCollection services,
         IConfiguration configuration) =>
         services

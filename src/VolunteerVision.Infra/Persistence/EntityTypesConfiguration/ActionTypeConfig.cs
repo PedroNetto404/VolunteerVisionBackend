@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VolunteerVision.Domain.Resouces.VoluntaryActions;
+using VolunteerVision.Domain.Resources.VoluntaryActions;
 
 namespace VolunteerVision.Infra.Persistence.EntityTypesConfiguration;
 

@@ -25,5 +25,3 @@ public record ErrorOr<T> where T : notnull
 
     public static implicit operator ErrorOr<T>(Error error) => Fail(error);
 }
-
-public sealed record Error(string Code, string Message);

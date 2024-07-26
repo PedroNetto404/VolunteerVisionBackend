@@ -6,9 +6,10 @@ namespace VolunteerVision.Infra.Persistence.EntityTypesConfiguration;
 
 internal abstract class AggregateTypeConfiguration<TAggregate> :
     IEntityTypeConfiguration<TAggregate>
-    where TAggregate : AggregateRoot
+    where TAggregate : class, IAggregateRoot
 {
-    public virtual void Configure(EntityTypeBuilder<TAggregate> builder)
+    public virtual void Configure(
+        EntityTypeBuilder<TAggregate> builder)
     {
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id);
