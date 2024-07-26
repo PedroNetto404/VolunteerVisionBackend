@@ -31,14 +31,11 @@ Estamos trabalhando com as seguintes tecnologias:
 ### Ambiente de desenvolvimento e produção
 ## Instalação
 
-Instruções passo a passo sobre como instalar o projeto. Inclua comandos de terminal, dependências necessárias e quaisquer outros detalhes pertinentes.
 
+TODO
 ```bash
 # Clone o repositório
-git clone https://github.com/usuario/repo.git
 
 # Entre no diretório do projeto
-cd repo
 
 # Instale as dependências
-npm install
