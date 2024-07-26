@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Infra.Persistence;
+namespace VolunteerVision.Infra.Persistence.EntityTypesConfiguration;
 
 internal abstract class AggregateTypeConfiguration<TAggregate> :
     IEntityTypeConfiguration<TAggregate>

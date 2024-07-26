@@ -21,6 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D9799D28-A93F-4ED5-B36B-1C4484E1AF57}"
+	ProjectSection(SolutionItems) = preProject
+		docs\api_contract.md = docs\api_contract.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +57,7 @@ Global
 		{2FE2EEB6-001B-4440-A57E-83612BB6C7C6} = {FFFABCC2-CD41-47F8-B29E-CE18C2277F8C}
 		{7621DCDA-9875-4BD2-B71C-BCF5DC1F58C3} = {FFFABCC2-CD41-47F8-B29E-CE18C2277F8C}
 		{290A6082-B463-4313-8C2E-39598771E04A} = {FFFABCC2-CD41-47F8-B29E-CE18C2277F8C}
+		{D9799D28-A93F-4ED5-B36B-1C4484E1AF57} = {6B7C1057-63CF-4BFD-8A01-BBA1A6FD1AD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB14EFB2-3B7F-43DF-8226-1D658CA2C58C}

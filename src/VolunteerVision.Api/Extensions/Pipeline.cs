@@ -1,4 +1,3 @@
-
 namespace VolunteerVision.Api.Extensions;
 
 public static class Pipeline
@@ -7,15 +6,10 @@ public static class Pipeline
     {
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger(config =>
-            {
-                config.RouteTemplate = "api/{documentName}/swagger.json";
-            }).UseSwaggerUI(config =>
-            {
-                config.SwaggerEndpoint("/api/v1/swagger.json", "VolunteerVision API v1");
-                config.RoutePrefix = "api";
-                config.DocumentTitle = "Koppler Labs Solidário - Ação #01";
-            }).UseDeveloperExceptionPage();
+            app
+                .UseSwagger()
+                .UseSwaggerUI()
+                .UseDeveloperExceptionPage();
         }
         else
         {

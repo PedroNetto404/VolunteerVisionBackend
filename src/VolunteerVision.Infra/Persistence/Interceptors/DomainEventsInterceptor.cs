@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Infra;
+namespace VolunteerVision.Infra.Persistence.Interceptors;
 
 public class DomainEventsInterceptor(
     ConcurrentQueue<IDomainEvent> toPublish

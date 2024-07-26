@@ -12,8 +12,17 @@ public static class Migrations
     {
         using var scope = app.Services.CreateScope();
         var services = scope.ServiceProvider;
-        var context = services.GetRequiredService<VolunteerVisionDbContext>();
-        context.Database.Migrate();
+        
+        try
+        {
+            using var context = services.GetRequiredService<VolunteerVisionDbContext>();
+            context.Database.Migrate();
+        }
+        catch
+        {
+            // ignored
+        }
+
         return app;
     }
 

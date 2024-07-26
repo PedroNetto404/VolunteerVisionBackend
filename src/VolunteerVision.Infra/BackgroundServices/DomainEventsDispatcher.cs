@@ -1,28 +1,36 @@
 ﻿using System.Collections.Concurrent;
+using MediatR;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Infra;
+namespace VolunteerVision.Infra.BackgroundServices;
 
-public class DomainEventsDispatcher(
+internal class DomainEventsDispatcher(
     ConcurrentQueue<IDomainEvent> domainEvents,
-    Mediator
+    IMediator mediator,
+    ILogger<DomainEventsDispatcher> logger
 ) : BackgroundService
 {
+    private static readonly PeriodicTimer Timer = new(TimeSpan.FromSeconds(1));
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {   
+    {
         while (!stoppingToken.IsCancellationRequested)
         {
-            try {
-                if (domainEvents.TryDequeue(out var domainEvent))
-                {
-                    // Dispatch domain event
-                }
-            } catch (Exception ex) {
-                // Log exception
-            }
+            await Timer.WaitForNextTickAsync(stoppingToken);
 
-            await Task.Delay(1000, stoppingToken);
+            while (domainEvents.TryDequeue(out var domainEvent))
+            {
+                try
+                {
+                    await mediator.Publish(domainEvent, stoppingToken);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Error occurred while handling domain event: {DomainEvent}", domainEvent);
+                }
+            }
         }
     }
 }

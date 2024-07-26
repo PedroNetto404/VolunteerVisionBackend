@@ -1,5 +1,5 @@
 using VolunteerVision.Api.Extensions;
-using VolunteerVision.Application;
+using VolunteerVision.Application.Extensions;
 using VolunteerVision.Domain.Extensions;
 using VolunteerVision.Infra.Extensions;
 

@@ -22,7 +22,7 @@ internal sealed class SwaggerOptionsSetup(
             }
         }
     );
+
     public void Configure(string? _, SwaggerGenOptions options) =>
         Configure(options);
-
 }
