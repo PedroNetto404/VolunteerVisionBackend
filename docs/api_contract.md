@@ -1059,17 +1059,12 @@ será armazenado para futuras ações.
 ### Update the status of a donation
 #### Request
 - Method: PATCH
-- URL: /donations/{ID}/status
+- URL: /donations/{ID}/cancel or /donations/{ID}/collect
 - Path Parameters:
   - ID: ID of the donation
 - Headers: 
     - Authorization: Bearer
-- Body:
-```json
-{
-  "status": "canceled | collected"
-}
-```
+- Body: empty
 
 #### Response
 - Status: 204 No Content
