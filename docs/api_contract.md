@@ -977,7 +977,7 @@ será armazenado para futuras ações.
 - Method: POST
 - URL: /donations
 - Headers: 
-    - Authorization: Bearer
+    - Authorization: Bearer {Token}
 - Body:
 ```json
 {
@@ -1003,8 +1003,8 @@ será armazenado para futuras ações.
   "donor_id": "8f14e45f-e62b-47e1-8d5e-2d6e734a4ff3",
   "voluntary_action_id": "8f14e45f-e62b-47e1-8d5e-2d6e734a4ff3",
   "status" : "waiting_collection",
-    "collected_at": null,
-    "collect_point_id": "8f14e45f-e62b-47e1-8d5e-2d6e734a4ff3",
+  "collected_at": null,
+  "collect_point_id": "8f14e45f-e62b-47e1-8d5e-2d6e734a4ff3",
   "items": [
     {
       "item_id": "8f14e45f-e62b-47e1-8d5e-2d6e734a4ff3",
