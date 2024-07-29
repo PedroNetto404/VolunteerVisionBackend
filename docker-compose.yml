@@ -6,26 +6,25 @@ services:
     container_name: volunteer_vision_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:${API_PORT};https://+:${API_PORT_HTTPS}
+      - ASPNETCORE_URLS=http://+:5458;https://+:5459
     ports:
       - "5458:5458"
       - "5459:5459"
     depends_on:
-      - database
+      - postgres
     networks:
       - backend
 
-  database:
+  postgres:
     image: postgres:latest
-    container_name: volunteer_vision_database
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=volunteer_vision_admin
+      - POSTGRES_PASSWORD=volunteer_vision_admin_password
+      - POSTGRES_DB=volunteer_vision_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "5432:5432"
     networks:
       - backend
 

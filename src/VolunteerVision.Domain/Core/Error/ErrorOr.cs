@@ -11,6 +11,8 @@ public record ErrorOr<T> where T : notnull
 
     public T Value => IsOk ? _value! : throw new InvalidOperationException("Error occurred. Value is not available.");
 
+    public Error Error => IsFail ? _error! : throw new InvalidOperationException("No error occurred.");
+
     private ErrorOr() { }
 
     public static ErrorOr<T> Ok(T value) => new() { _value = value };
