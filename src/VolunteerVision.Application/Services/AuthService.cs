@@ -16,7 +16,7 @@ public sealed class AuthService(
 {
     public async Task<ErrorOr<AuthResponse>> AuthenticateAsync(string email, string password)
     {
-        var user = await unitOfWork.Users.GetOneAsync(new UserByEmailSpec(email));
+        var user = await unitOfWork.Users.FirstOrDefaultAsync(new UserByEmailSpec(email));
         if (user is null)
         {
             return UserNotFound.Instance;

@@ -21,18 +21,23 @@ public static class Pipeline
             .UseHttpsRedirection()
             .UseRouting()
             .UseAuthentication()
-            .UseAuthorization()
-            .UseEndpoints(endpoints =>
+            .UseAuthorization();
+
+        app.MapControllers();
+
+        app.MapGet("/", async (context) =>
+        {
+            if (app.Environment.IsDevelopment())
             {
-                endpoints.MapGet("/error", async context =>
-                {
-                    context.Response.StatusCode = 500;
-                    await context.Response.WriteAsync("An unexpected error occurred. Please try again later.");
-                });
+                context.Response.Redirect("/swagger", true);
+                return;
+            }
 
-
-                endpoints.MapControllers();
+            await context.Response.WriteAsJsonAsync(new
+            {
+                Message = "Api UP!!!"
             });
+        });
 
         return app;
     }

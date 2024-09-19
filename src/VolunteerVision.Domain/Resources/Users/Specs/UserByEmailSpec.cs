@@ -1,9 +1,10 @@
-﻿using VolunteerVision.Domain.Core.Abstractions;
-using VolunteerVision.Domain.Resources.Users;
+﻿using Ardalis.Specification;
 
 namespace VolunteerVision.Domain.Resources.Users.Specs;
 
-public sealed class UserByEmailSpec : Spec<User>
+public sealed class UserByEmailSpec : SingleResultSpecification<User>
 {
-    public UserByEmailSpec(string email) => Where(u => u.Email == email);
+    public UserByEmailSpec(string email) =>
+        Query.AsNoTracking()
+             .Where(p => p.Email == email);
 }
