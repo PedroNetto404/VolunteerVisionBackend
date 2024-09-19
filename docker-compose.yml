@@ -1,20 +1,6 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  api:
-    build: .
-    container_name: volunteer_vision_api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5458;https://+:5459
-    ports:
-      - "5458:5458"
-      - "5459:5459"
-    depends_on:
-      - postgres
-    networks:
-      - backend
-
   postgres:
     image: postgres:latest
     environment:
