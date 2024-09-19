@@ -1,5 +1,4 @@
 ﻿using VolunteerVision.Domain.Core.Error;
-using VolunteerVision.Domain.Resources.Users;
 
 namespace VolunteerVision.Domain.Resources.Users.Errors;
 
