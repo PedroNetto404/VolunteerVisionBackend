@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 namespace VolunteerVision.Application.Ports.Models;
 

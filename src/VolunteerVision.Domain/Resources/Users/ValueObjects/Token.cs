@@ -1,6 +1,7 @@
 ﻿using VolunteerVision.Domain.Core.Error;
+using VolunteerVision.Domain.Resources.Users.Errors;
 
-namespace VolunteerVision.Application.Ports.Models;
+namespace VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 /// <summary>
 /// Represents a token and its expiration date.
@@ -16,12 +17,12 @@ public record Token
     private Token(string value, long expiration) =>
         (Value, Expiration) = (value, expiration);
 
-    public bool IsExpired => 
+    public bool IsExpired =>
         DateTimeOffset.FromUnixTimeSeconds(Expiration) < DateTimeOffset.UtcNow;
 
     public static ErrorOr<Token> Create(string value, long expiration)
     {
-        if(expiration < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+        if (expiration < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         {
             return TokenExpired.Instance;
         }

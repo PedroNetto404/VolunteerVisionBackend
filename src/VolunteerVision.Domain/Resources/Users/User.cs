@@ -1,9 +1,8 @@
-﻿using Ardalis.SmartEnum;
-using MediatR;
-using VolunteerVision.Application.Ports.Models;
+﻿using MediatR;
 using VolunteerVision.Domain.Core.Abstractions;
 using VolunteerVision.Domain.Core.Error;
 using VolunteerVision.Domain.Ports;
+using VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 namespace VolunteerVision.Domain.Resources.Users;
 
@@ -12,7 +11,7 @@ public sealed class User : AggregateRoot
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string HashedPassword { get; private set; }
-    public Role Role { get; private set;}
+    public Role Role { get; private set; }
     public Token? RefreshToken { get; private set; }
 
     private User(
@@ -49,14 +48,14 @@ public sealed class User : AggregateRoot
             ? Unit.Value
             : InvalidCredentials.Instance;
 
-    public ErrorOr<Unit> SetRefreshToken(Token refreshToken) 
+    public ErrorOr<Unit> SetRefreshToken(Token refreshToken)
     {
-        if(RefreshToken is { IsExpired: false })
+        if (RefreshToken is { IsExpired: false })
         {
             return RefreshTokenNotExpired.Instance;
         }
 
-        if(refreshToken.IsExpired)
+        if (refreshToken.IsExpired)
         {
             return RefreshTokenExpired.Instance;
         }

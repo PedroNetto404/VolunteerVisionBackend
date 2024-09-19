@@ -1,5 +1,5 @@
-﻿using VolunteerVision.Application.Ports.Models;
-using VolunteerVision.Domain.Resources.Users;
+﻿using VolunteerVision.Domain.Resources.Users;
+using VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 namespace VolunteerVision.Application;
 
