@@ -33,5 +33,12 @@ public static class DependencyInjection
         {
             config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
         });
+
+        services.AddRouting(config =>
+        {
+            config.LowercaseUrls = true;
+            config.LowercaseQueryStrings = true;
+            config.AppendTrailingSlash = true;
+        });
     }
 }
