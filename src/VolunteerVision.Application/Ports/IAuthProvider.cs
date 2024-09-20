@@ -1,5 +1,5 @@
 ﻿using VolunteerVision.Application.Ports.Models;
-using VolunteerVision.Domain.Core.Error;
+using VolunteerVision.Domain.Core.Maybe;
 
 namespace VolunteerVision.Application.Ports;
 
@@ -8,9 +8,9 @@ namespace VolunteerVision.Application.Ports;
 /// </summary>
 public interface IAuthProvider
 {
-    Task<ErrorOr<AuthResponse>> AuthenticateAsync(string email, string password);
-    Task<ErrorOr<AuthResponse>> RefreshTokenAsync(string refreshToken);
-    Task<ErrorOr<AuthResponse>> RegisterAsync(
+    Task<Maybe<AuthModel>> AuthenticateAsync(string email, string password);
+    Task<Maybe<AuthModel>> RefreshTokenAsync(string refreshToken);
+    Task<Maybe<AuthModel>> RegisterAsync(
         string name,
         string email, 
         string password);

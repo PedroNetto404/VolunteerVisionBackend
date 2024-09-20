@@ -1,41 +1,53 @@
-﻿using MediatR;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using VolunteerVision.Domain.Core.Abstractions;
-using VolunteerVision.Domain.Core.Error;
+using VolunteerVision.Domain.Core.Maybe;
+using VolunteerVision.Domain.Errors;
 using VolunteerVision.Domain.Ports;
+using VolunteerVision.Domain.Resources.Users.Enums;
+using VolunteerVision.Domain.Resources.Users.Events;
 using VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 namespace VolunteerVision.Domain.Resources.Users;
 
-public sealed class User : AggregateRoot
+public sealed class User : AuditableAggregateRoot
 {
     public string Name { get; private set; }
-    public string Email { get; private set; }
+    public Email Email { get; private set; }
     public string HashedPassword { get; private set; }
     public Role Role { get; private set; }
     public Token? RefreshToken { get; private set; }
 
-    private User(
+    private User
+    (
         string name,
-        string email,
-        string hashedPassword)
+        Email email,
+        string hashedPassword,
+        Role role
+    )
     {
         Name = name;
         Email = email;
         HashedPassword = hashedPassword;
-        Role = Role.CommonUser;
+        Role = role;
     }
 
-    public static ErrorOr<User> Create(
+    public static Maybe<User> CreateCommon(
         string name,
-        string email,
-        string password,
+        Email email,
+        Password password,
         IPasswordHasher passwordHasher)
     {
-        var hashedPassword = passwordHasher.HashPassword(password);
-        var user = new User(
+        if (string.IsNullOrEmpty(name))
+        {
+            return DomainErrors.Users.InvalidName;
+        }
+
+        var user = new User
+        (
             name,
             email,
-            hashedPassword
+            passwordHasher.HashPassword(password.Value),
+            Role.Common
         );
 
         user.RaiseDomainEvent(new UserCreated(user.Id));
@@ -43,38 +55,20 @@ public sealed class User : AggregateRoot
         return user;
     }
 
-    public ErrorOr<Unit> CanLogin(string password, IPasswordHasher passwordHasher) =>
-        passwordHasher.VerifyHashedPassword(HashedPassword, password)
-            ? Unit.Value
-            : InvalidCredentials.Instance;
-
-    public ErrorOr<Unit> SetRefreshToken(Token refreshToken)
+    public Maybe SetRefreshToken(Token refreshToken)
     {
-        if (RefreshToken is { IsExpired: false })
+        if (RefreshToken is { Expired: false })
         {
-            return RefreshTokenNotExpired.Instance;
-        }
-
-        if (refreshToken.IsExpired)
-        {
-            return RefreshTokenExpired.Instance;
+            return DomainErrors.Users.RefreshTokenAlreadySetted;
         }
 
         RefreshToken = refreshToken;
-
-        return Unit.Value;
+        return Maybe.Ok();
     }
-
-    public ErrorOr<Unit> CanRefreshToken(string refreshToken) =>
-        RefreshToken is { IsExpired: false, Value: var value }
-            ? value == refreshToken
-                ? Unit.Value
-                : InvalidRefreshToken.Instance
-            : RefreshTokenExpired.Instance;
+    
+    public bool CanRefreshToken => RefreshToken is { Expired: false };
 
 #pragma warning disable CS0628 // New protected member declared in sealed type
-
-
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     /// <summary>
     /// EF Core constructor

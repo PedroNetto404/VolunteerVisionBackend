@@ -19,9 +19,10 @@ public static class Pipeline
 
         app
             .UseHttpsRedirection()
-            .UseRouting()
             .UseAuthentication()
             .UseAuthorization();
+
+        app.UseRouting();
 
         app.MapControllers();
 

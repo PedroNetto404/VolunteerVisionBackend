@@ -23,6 +23,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D9799D28-A93F-4ED5-B36B-1C4484E1AF57}"
 	ProjectSection(SolutionItems) = preProject
 		docs\api_contract.md = docs\api_contract.md
+		docs\Authentication.md = docs\Authentication.md
 	EndProjectSection
 EndProject
 Global

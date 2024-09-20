@@ -12,11 +12,11 @@ builder
     .AddPresentation()
     .AddDomain()
     .AddInfrastructure(builder.Configuration)
-    .AddApplication(builder.Configuration);
+    .AddApplication();
 
-await builder
-    .Build()
-    .ApplyMigrations()
-    .AddSeedIfDevelopment()
-    .UsePipeline()
-    .RunAsync();
+var app = builder.Build();
+
+await app.ApplyMigrations();
+await Task.WhenAll(
+    app.UsePipeline().RunAsync(),
+    app.AddSeedDatabaseIfDevelopmentAsync());

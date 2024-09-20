@@ -1,10 +1,12 @@
+
+
 namespace VolunteerVision.Domain.Core.Abstractions;
 
 public abstract class AggregateRoot : Entity, IAggregateRoot
 {
     private readonly List<IDomainEvent> _domainEvents = [];
-   
-    public IReadOnlyCollection<IDomainEvent> DomainEvents => 
+
+    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
         _domainEvents.ToList()
                      .AsReadOnly();
 
@@ -14,4 +16,16 @@ public abstract class AggregateRoot : Entity, IAggregateRoot
     public void RaiseDomainEvent(
         IDomainEvent domainEvent) =>
         _domainEvents.Add(domainEvent);
+}
+
+public abstract class AuditableAggregateRoot : AggregateRoot, IAuditableEntity
+{
+    public DateTime CreatedAtUtc { get; private set; } = DateTime.UtcNow;
+
+    public DateTime UpdatedAtUtc { get; private set; } = DateTime.UtcNow;
+
+    public DateTime? DeletedAtUtc { get; private set; }
+
+    protected void OnUpdated() => UpdatedAtUtc = DateTime.UtcNow;
+    protected void OnDeleted() => DeletedAtUtc = DateTime.UtcNow;
 }

@@ -11,18 +11,19 @@ internal sealed class JwtOptionsSetup(
     private readonly JwtOptions _options = options.Value;
     public void Configure(JwtBearerOptions options)
     {
-        options.RequireHttpsMetadata = false;
+        options.RequireHttpsMetadata = true;
         options.SaveToken = true;
         options.TokenValidationParameters = new()
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
             ValidIssuer = _options.Issuer,
+            ValidateAudience = true,
             ValidAudience = _options.Audience,
+            ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Secret))
         };
     }
+    
     public void Configure(string? name, JwtBearerOptions options) => Configure(options);
 }

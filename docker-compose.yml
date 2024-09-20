@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     environment:
       - POSTGRES_USER=volunteer_vision_admin
-      - POSTGRES_PASSWORD=volunteer_vision_admin_password
+      - POSTGRES_PASSWORD=volunteer_vision_admin123
       - POSTGRES_DB=volunteer_vision_db
     volumes:
       - postgres_data:/var/lib/postgresql/data

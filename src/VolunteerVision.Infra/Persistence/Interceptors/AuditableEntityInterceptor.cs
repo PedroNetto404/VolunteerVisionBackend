@@ -23,20 +23,22 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 
             switch (entry.State)
             {
-                case EntityState.Added:
-                    entity.OnCreate();
-                    break;
-                case EntityState.Modified when entity.DeletedAt is not null:
-                    entity.OnUpdate();
+                case EntityState.Modified when entity.DeletedAtUtc is not null:
+                    entity.GetType()
+                          .GetProperty(nameof(IAuditableEntity.UpdatedAtUtc))!
+                          .SetValue(entity, DateTime.UtcNow);
                     break;
                 
                 case EntityState.Deleted:
-                    entity.OnDelete();
+                    entity.GetType()
+                          .GetProperty(nameof(IAuditableEntity.DeletedAtUtc))!
+                          .SetValue(entity, DateTime.UtcNow);
                         
                     context.Entry(entity).State = EntityState.Modified;
+                    
                     context
                         .Entry(entity)
-                        .Property(nameof(IAuditableEntity.DeletedAt))
+                        .Property(nameof(IAuditableEntity.DeletedAtUtc))
                         .IsModified = true;
                     
                     break;

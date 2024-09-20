@@ -1,5 +1,5 @@
 using VolunteerVision.Domain.Core.Abstractions;
-using VolunteerVision.Domain.Core.Error;
+using VolunteerVision.Domain.Core.Maybe;
 using VolunteerVision.Domain.Resources.VoluntaryActions.Events;
 
 namespace VolunteerVision.Domain.Resources.VoluntaryActions;
@@ -8,7 +8,7 @@ public sealed class VoluntaryAction : AggregateRoot
 {
 
     //#TODO: create factory method and configure private constructor
-    public static ErrorOr<VoluntaryAction> Create()
+    public static Maybe<VoluntaryAction> Create()
     {
         var action = new VoluntaryAction();
         action.RaiseDomainEvent(new VoluntaryActionCreated(action.Id));

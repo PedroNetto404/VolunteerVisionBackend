@@ -16,17 +16,18 @@ public static class DependencyInjection
             {
                 ConcreteType = p,
                 Abstractions = p.GetInterfaces(),
-                ServiceLifetime = p.GetCustomAttribute<ServiceAttribute>()?.Lifetime
+                ServiceAttribute = p.GetCustomAttribute<ServiceAttribute>()
             })
-            .Where(p => p.ServiceLifetime != null)
+            .Where(p => p.ServiceAttribute != null)
             .SelectMany(p => p.Abstractions.Select(
                 q => new ServiceDescriptor(
-                    q,
-                    p.ConcreteType,
-                    p.ServiceLifetime!.Value)))
-            .Aggregate(services, (acc, p) =>
+                    serviceKey: (p.ServiceAttribute as KeyedServiceAttribute)?.Key,
+                    serviceType: q,
+                    implementationType: p.ConcreteType,
+                    lifetime: p.ServiceAttribute!.Lifetime)))
+            .Aggregate(services, (services, current) =>
             {
-                acc.Add(p);
-                return acc;
+                services.Add(current);
+                return services;
             });
 }

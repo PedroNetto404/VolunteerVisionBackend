@@ -7,7 +7,7 @@ public abstract class Entity : IEquatable<Entity>, IEntity
 {
     public Guid Id { get; } = Guid.NewGuid();
 
-    public bool Equals(Entity? other) 
+    public bool Equals(Entity? other)
     {
         if (other is null)
         {
@@ -33,4 +33,17 @@ public abstract class Entity : IEquatable<Entity>, IEntity
 
     public static bool operator !=(Entity? left, Entity? right) =>
         !(left == right);
+}
+
+public abstract class AuditableEntity : Entity, IAuditableEntity
+{
+    public DateTime CreatedAtUtc { get; private set; } = DateTime.UtcNow;
+
+    public DateTime UpdatedAtUtc { get; private set; } = DateTime.UtcNow;
+
+    public DateTime? DeletedAtUtc { get; private set; }
+
+    protected void OnUpdated() => UpdatedAtUtc = DateTime.UtcNow;
+
+    protected void OnDeleted() => DeletedAtUtc = DateTime.UtcNow;
 }

@@ -5,6 +5,6 @@
 /// </summary>
 public interface IPasswordHasher
 {
-    bool VerifyHashedPassword(string hashedPassword, string password);
+    bool Match(string hashedPassword, string password);
     string HashPassword(string password);
 }

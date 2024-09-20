@@ -5,10 +5,13 @@ namespace VolunteerVision.Application.Extensions;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(
-        this IServiceCollection services,
-        IConfiguration configuration) => services.AddMediatR(config =>
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-    });
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+        });
+
+        return services;
+    }
 }

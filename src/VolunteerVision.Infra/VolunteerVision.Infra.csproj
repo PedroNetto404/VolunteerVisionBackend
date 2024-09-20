@@ -8,6 +8,7 @@
     <ProjectReference Include="..\VolunteerVision.Application\VolunteerVision.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />

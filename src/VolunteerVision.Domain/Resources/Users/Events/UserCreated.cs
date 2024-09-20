@@ -1,5 +1,5 @@
 ﻿using VolunteerVision.Domain.Core.Abstractions;
 
-namespace VolunteerVision.Domain;
+namespace VolunteerVision.Domain.Resources.Users.Events;
 
 public sealed record UserCreated(Guid UserId) : IDomainEvent;

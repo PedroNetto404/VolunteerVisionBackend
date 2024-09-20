@@ -1,4 +1,4 @@
-namespace VolunteerVision.Application;
+namespace VolunteerVision.Application.Ports;
 
 public interface IUserContextProvider
 {
