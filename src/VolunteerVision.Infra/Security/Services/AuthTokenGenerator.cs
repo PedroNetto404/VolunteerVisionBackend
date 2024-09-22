@@ -5,7 +5,6 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using VolunteerVision.Application.Ports;
-using VolunteerVision.Application.Ports.Models;
 using VolunteerVision.Domain.Core.Attributes;
 using VolunteerVision.Domain.Resources.Users;
 using VolunteerVision.Domain.Resources.Users.ValueObjects;

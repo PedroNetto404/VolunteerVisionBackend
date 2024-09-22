@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VolunteerVision.Domain.Resources.Users;
 
 namespace VolunteerVision.Infra.Persistence;
 

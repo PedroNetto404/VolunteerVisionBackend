@@ -20,8 +20,8 @@ internal static class SeedDevelopmentDatabase
             Enumerable.Range(0, 10).Select(p =>
                 User.CreateCommon(
                     Guid.NewGuid().ToString(),
-                    Email.Create("pedro_teste@gmail.com"),
-                    Password.Create("Strong@123!@!#"),
+                    Email.New("pedro_teste@gmail.com"),
+                    Password.New("Strong@123!@!#"),
                     hasher).Value)
             .ToArray());
     }

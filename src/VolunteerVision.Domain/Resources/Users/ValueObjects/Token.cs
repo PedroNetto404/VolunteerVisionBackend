@@ -1,6 +1,4 @@
-﻿using VolunteerVision.Domain.Core.Maybe;
-
-namespace VolunteerVision.Domain.Resources.Users.ValueObjects;
+﻿namespace VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 /// <summary>
 /// Represents a token and its expiration date.

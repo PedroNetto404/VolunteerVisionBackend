@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using VolunteerVision.Domain.Core.Abstractions;
-using VolunteerVision.Domain.Core.Maybe;
+﻿using VolunteerVision.Domain.Core.Abstractions;
+using VolunteerVision.Domain.Core.Result;
 using VolunteerVision.Domain.Errors;
 using VolunteerVision.Domain.Ports;
 using VolunteerVision.Domain.Resources.Users.Enums;
@@ -31,7 +30,7 @@ public sealed class User : AuditableAggregateRoot
         Role = role;
     }
 
-    public static Maybe<User> CreateCommon(
+    public static Result<User> CreateCommon(
         string name,
         Email email,
         Password password,
@@ -39,7 +38,7 @@ public sealed class User : AuditableAggregateRoot
     {
         if (string.IsNullOrEmpty(name))
         {
-            return DomainErrors.Users.InvalidName;
+            return DomainError.User.InvalidName;
         }
 
         var user = new User
@@ -55,18 +54,37 @@ public sealed class User : AuditableAggregateRoot
         return user;
     }
 
-    public Maybe SetRefreshToken(Token refreshToken)
+    public Result SetRefreshToken(Token refreshToken)
     {
         if (RefreshToken is { Expired: false })
         {
-            return DomainErrors.Users.RefreshTokenAlreadySetted;
+            return DomainError.User.ValidRefreshTokenAlreadyExists;
         }
 
         RefreshToken = refreshToken;
-        return Maybe.Ok();
+        return Result.Ok();
+    }
+
+    public Result CanRefreshToken(string refreshToken)
+    {
+        if(RefreshToken is null)
+        {
+            return DomainError.User.NotHavaRefreshToken;
+        }
+
+        if(refreshToken != RefreshToken.Value)
+        {
+            return DomainError.User.RefreshTokenNotMatch;
+        }
+
+        if(RefreshToken.Expired)
+        {
+            return DomainError.User.ExpiredRefreshToken;
+        }
+
+        return Result.Ok();
     }
     
-    public bool CanRefreshToken => RefreshToken is { Expired: false };
 
 #pragma warning disable CS0628 // New protected member declared in sealed type
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.

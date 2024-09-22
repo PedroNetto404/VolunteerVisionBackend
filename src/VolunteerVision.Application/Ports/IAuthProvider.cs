@@ -1,5 +1,5 @@
-﻿using VolunteerVision.Application.Ports.Models;
-using VolunteerVision.Domain.Core.Maybe;
+﻿using VolunteerVision.Domain.Core.Result;
+using VolunteerVision.Domain.Resources.Users.ValueObjects;
 
 namespace VolunteerVision.Application.Ports;
 
@@ -8,10 +8,24 @@ namespace VolunteerVision.Application.Ports;
 /// </summary>
 public interface IAuthProvider
 {
-    Task<Maybe<AuthModel>> AuthenticateAsync(string email, string password);
-    Task<Maybe<AuthModel>> RefreshTokenAsync(string refreshToken);
-    Task<Maybe<AuthModel>> RegisterAsync(
-        string name,
-        string email, 
-        string password);
+    Task<Result<AuthModel>> AuthenticateAsync(string email, string password);
+    Task<Result<AuthModel>> RefreshTokenAsync(string refreshToken);
+    Task<Result<AuthModel>> RegisterAsync(string name, string email, string password);
+}
+
+public sealed record AuthModel(
+    string AccessTokem,
+    long AccessTokenExpiresIn,
+    string RefreshToken,
+    long RefreshTokenExpiresIn,
+    string TokenType = "Bearer"
+)
+{
+    public static AuthModel Create(Token accessToken, Token refreshToken) =>
+        new(
+            accessToken.Value,
+            accessToken.Expiration,
+            refreshToken.Value,
+            refreshToken.Expiration
+        );
 }
