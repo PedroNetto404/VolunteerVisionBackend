@@ -27,9 +27,7 @@ public static class Pipeline
         app.UseRouting();
 
         app.MapControllers();
-
         app.MapAuthEndpoints();
-
         app.MapGet("/", async (context) =>
         {
             if (app.Environment.IsDevelopment())
