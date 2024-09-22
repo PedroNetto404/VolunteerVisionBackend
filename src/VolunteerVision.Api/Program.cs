@@ -16,7 +16,6 @@ builder
 
 var app = builder.Build();
 
-await app.ApplyMigrations();
-await Task.WhenAll(
-    app.UsePipeline().RunAsync(),
-    app.AddSeedDatabaseIfDevelopmentAsync());
+_ = app.SetupDatabaseAsync();
+
+await app.UsePipeline().RunAsync();
